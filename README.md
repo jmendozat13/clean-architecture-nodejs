@@ -26,7 +26,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Clean-architecture-nodejs](https://github.com/jmendozat13/clean-architecture-nodejs) example for starter repository.
 
 ## Installation
 
@@ -62,14 +62,14 @@ $ npm run test:cov
 
 ## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Clean-architecture-nodejs based in Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers.
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Valentin Mendoza](http://vmtgames.com/)
+- Website - [http://vmtgames.com/](http://vmtgames.com/)
+- Twitter - [@mendozat94](https://twitter.com/mendozat94)
 
 ## License
 
-  Nest is [MIT licensed](LICENSE).
+  Clean-architecture-nodejs is [MIT licensed](LICENSE).
