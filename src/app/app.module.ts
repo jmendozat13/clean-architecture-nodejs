@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './controllers/app.controller';
-import { AppUseCase } from './usecases/usecase/app.usecase';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CatSchema } from './usecases/repository/schema/cat.schema';
 import { CatsController } from './controllers/cats.controller';
@@ -12,7 +10,7 @@ import 'dotenv/config';
     MongooseModule.forRoot(process.env.DB_CONNECTION, { useNewUrlParser: true }),
     MongooseModule.forFeature([{ name: 'Cat', schema: CatSchema }]),
   ],
-  controllers: [AppController, CatsController],
-  providers: [AppUseCase, CatsUseCase],
+  controllers: [CatsController],
+  providers: [CatsUseCase],
 })
 export class AppModule { }
