@@ -1,14 +1,14 @@
 import { Controller, Get, Post, Body, UsePipes } from '@nestjs/common';
-import { CreateCatDto } from '../entities/dto/create-cat-dto';
-import { CatsUseCase } from '../usecases/usecase/cats.usecase';
-import { ICat } from '../entities/interfaces/cat.interfaces';
+import { CreateCatDto } from '../../entities/dto/create-cat-dto';
+import { CatsUseCase } from '../../usecases/usecase/cats.usecase';
+import { ICat } from '../../entities/interfaces/cat.interfaces';
 import { ValidationPipe } from '../pipes/validation.pipe';
+import { Cat } from '../../entities/entity/cat.entity';
 import {
     ApiOperation,
     ApiResponse,
     ApiUseTags,
 } from '@nestjs/swagger';
-import { Cat } from '../entities/classes/cat.class';
 
 @ApiUseTags('cats')
 @Controller('cats')
