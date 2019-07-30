@@ -20,7 +20,11 @@ export class CatsController {
     @ApiResponse({
         status: 201,
         description: 'The record has been successfully created.',
-        type: Cat,
+        type: CreateCatDto,
+    })
+    @ApiResponse({
+        status: 500,
+        description: 'Server error',
     })
     @UsePipes(new ValidationPipe())
     async create(@Body() createCatDto: CreateCatDto) {
