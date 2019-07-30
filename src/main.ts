@@ -5,6 +5,7 @@ import { AppModule } from './app/app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
+  app.enableCors();
   const options = new DocumentBuilder()
     .setTitle('Clean Architecture NodeJS')
     .setDescription('The clean architecture for application backend')
