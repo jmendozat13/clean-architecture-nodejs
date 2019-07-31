@@ -8,3 +8,4 @@ export interface IKendal extends Document {
     readonly category: string;
     readonly parentid: Types.ObjectId;
 }
+  

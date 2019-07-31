@@ -1,5 +1,5 @@
-import { Controller, Post, UsePipes, Get, ValidationPipe, Body, HttpStatus, HttpException } from '@nestjs/common';
-import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Controller, Post, UsePipes, Get, ValidationPipe, Body, HttpStatus, HttpException, Delete, Param } from '@nestjs/common';
+import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { KendalUseCase } from '../../usecases/usecase/kendal.usecase';
 import { Kendal } from '../../entities/entity/kendal.entity';
 import { CreateKendalDto } from '../../entities/dto/kendal.dto';
@@ -41,4 +41,12 @@ export class KendalController {
     async findAll(): Promise<IKendal[]> {
         return await this.kendalUseCase.findAll();
     }
+
+    @Delete(':id')
+    @ApiImplicitParam({ name: 'id' })
+    async deleteById(@Param() params){
+        await this.kendalUseCase.deleteById(params.id);
+        return {status:1, message: 'Eliminado Correctamente'}
+    }
+
 }
