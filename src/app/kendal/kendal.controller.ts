@@ -7,7 +7,7 @@ import { IKendal } from '../../entities/interfaces/kendal.interfaces';
 
 @Controller('kendal')
 @ApiUseTags('Kendal')
-export class WallvController {
+export class KendalController {
     constructor(private readonly kendalUseCase: KendalUseCase) { }
     @Post()
     @ApiOperation({ title: 'Add logical knowledge to Kendal' })
