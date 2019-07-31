@@ -2,7 +2,7 @@ import { Controller, Get, HttpStatus, Param } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiUseTags, ApiImplicitParam } from '@nestjs/swagger';
 
 @Controller('status')
-@ApiUseTags('status')
+@ApiUseTags('Status')
 export class StatusController {
     @Get(':ping')
     @ApiImplicitParam({ name: 'ping' })

@@ -1,29 +1,29 @@
 import { Controller, Post, UsePipes, Get, ValidationPipe, Body, HttpStatus, HttpException } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { WallvUseCase } from '../../usecases/usecase/wallv.usecase';
-import { Wallv } from '../../entities/entity/wallv.entity';
-import { CreateWallvDto } from '../../entities/dto/wallv.dto';
-import { IWallv } from '../../entities/interfaces/wallv.interfaces';
+import { KendalUseCase } from '../../usecases/usecase/kendal.usecase';
+import { Kendal } from '../../entities/entity/kendal.entity';
+import { CreateKendalDto } from '../../entities/dto/kendal.dto';
+import { IKendal } from '../../entities/interfaces/kendal.interfaces';
 
-@Controller('wallv')
-@ApiUseTags('wallv')
+@Controller('kendal')
+@ApiUseTags('Kendal')
 export class WallvController {
-    constructor(private readonly wallvUseCase: WallvUseCase) { }
+    constructor(private readonly kendalUseCase: KendalUseCase) { }
     @Post()
-    @ApiOperation({ title: 'Add logical knowledge to Wallv' })
+    @ApiOperation({ title: 'Add logical knowledge to Kendal' })
     @ApiResponse({
         status: HttpStatus.CREATED,
         description: 'The record has been successfully created.',
-        type: CreateWallvDto,
+        type: CreateKendalDto,
     })
     @ApiResponse({
         status: 500,
         description: 'Server error',
     })
     @UsePipes(new ValidationPipe())
-    async create(@Body() createWallvDto: CreateWallvDto) {
+    async create(@Body() createKendalDto: CreateKendalDto) {
         try {
-            const wallv = await this.wallvUseCase.create(createWallvDto);
+            const wallv = await this.kendalUseCase.create(createKendalDto);
             return wallv;
         } catch (err) {
             throw new HttpException({ status: HttpStatus.INTERNAL_SERVER_ERROR, error: err.message },
@@ -32,13 +32,13 @@ export class WallvController {
     }
 
     @Get()
-    @ApiOperation({ title: 'Return all logical knowledge of Wallv' })
+    @ApiOperation({ title: 'Return all logical knowledge of Kendal' })
     @ApiResponse({
         status: HttpStatus.OK,
         description: 'The found record',
-        type: Wallv,
+        type: Kendal,
     })
-    async findAll(): Promise<IWallv[]> {
-        return this.wallvUseCase.findAll();
+    async findAll(): Promise<IKendal[]> {
+        return await this.kendalUseCase.findAll();
     }
 }

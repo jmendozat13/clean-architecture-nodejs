@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-export const WallvSchema = new mongoose.Schema({
+export const KendalSchema = new mongoose.Schema({
     title: {
         type: String,
         max: 80,

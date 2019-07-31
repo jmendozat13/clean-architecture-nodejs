@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { WallvModule } from './wallv/wallv.module';
+import { KendalModule } from './kendal/kendal.module';
 import { MessagehistoryModule } from './messagehistory/messagehistory.module';
 import { StatusController } from './status/status.controller';
 import 'dotenv/config';
@@ -8,7 +8,7 @@ import 'dotenv/config';
 @Module({
   imports: [
     MongooseModule.forRoot(process.env.DB_CONNECTION, { useNewUrlParser: true }),
-    WallvModule,
+    KendalModule,
     MessagehistoryModule,
   ],
   controllers: [StatusController],

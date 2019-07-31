@@ -1,6 +1,6 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 
-export class Wallv {
+export class Kendal {
     @ApiModelProperty()
     title: string;
     @ApiModelProperty()

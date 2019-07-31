@@ -1,6 +1,6 @@
 import { Document, Types } from 'mongoose';
 
-export interface IWallv extends Document {
+export interface IKendal extends Document {
     readonly title: string;
     readonly input: string;
     readonly output: string;
