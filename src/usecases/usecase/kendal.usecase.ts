@@ -17,13 +17,13 @@ export class KendalUseCase {
     }
 
     async deleteById(id: string): Promise<string> {
-        await this.kendalModel.deleteOne({_id: id});
+        await this.kendalModel.deleteOne({ _id: id });
         return 'Eliminado correctamente';
     }
 
     async update(id: string, updateKendalDto: ClassKendalDto): Promise<string> {
         await this.kendalModel.findByIdAndUpdate(id, updateKendalDto);
-        return "Editado correctamente";
+        return 'Editado correctamente';
     }
 
 }

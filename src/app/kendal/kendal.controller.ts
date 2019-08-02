@@ -2,7 +2,7 @@ import { Controller, Post, UsePipes, Get, ValidationPipe, Body, HttpStatus, Http
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { KendalUseCase } from '../../usecases/usecase/kendal.usecase';
 import { Kendal } from '../../entities/entity/kendal.entity';
-import { ClassKendalDto} from '../../entities/dto/kendal.dto';
+import { ClassKendalDto } from '../../entities/dto/kendal.dto';
 import { IKendal } from '../../entities/interfaces/kendal.interfaces';
 
 @Controller('kendal')
@@ -50,12 +50,11 @@ export class KendalController {
         type: Kendal,
     })
     @ApiImplicitParam({ name: 'id' })
-    async deleteById(@Param() params){
+    async deleteById(@Param() params) {
         await this.kendalUseCase.deleteById(params.id);
-        return {status:1, message: 'Eliminado Correctamente'}
+        return { status: 1, message: 'Eliminado Correctamente' };
     }
 
-    
     @UsePipes(new ValidationPipe())
     @Put(':id')
     @ApiOperation({ title: 'Update logical knowledge to Kendal' })
