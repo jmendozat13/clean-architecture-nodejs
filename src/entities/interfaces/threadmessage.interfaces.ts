@@ -1,6 +1,6 @@
 import { Document, Types } from 'mongoose';
 
-export interface IMessageThread extends Document {
+export interface IThreadMessage extends Document {
     readonly username: string;
     readonly date: Date;
     readonly message: string;

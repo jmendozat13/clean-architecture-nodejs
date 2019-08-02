@@ -1,6 +1,6 @@
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
 
-export interface IMessageHistory extends Document {
+export interface IHistoryMessage extends Document {
     readonly date: Date;
     readonly ip: string;
     readonly device: string;

@@ -7,5 +7,5 @@ export class KendalBotDto {
         description: 'Message query by users',
     })
     @IsString()
-    message: string;
+    inputmessage: string;
 }

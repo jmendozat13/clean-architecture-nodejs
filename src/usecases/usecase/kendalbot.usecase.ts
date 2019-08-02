@@ -10,6 +10,7 @@ export class KendalBotUseCase {
     constructor(@InjectModel('Kendal') private readonly kendalModel: Model<IKendal>) { }
 
     async chatBot(kendalBotDto: KendalBotDto): Promise<KendalBotResponse> {
-        return await new KendalBotResponse('Hola tarado!');
+        return await new KendalBotResponse('Hola soy Kendal, el asistente virtual de la UNT. ' +
+            'Mis creadores estan trabajando en mi para ser mas inteligente, dentro de poco te ofrecere la ayuda que necesitas.');
     }
 }
