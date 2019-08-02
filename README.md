@@ -66,8 +66,9 @@ Clean-architecture-nodejs based in Nest is an MIT-licensed open source project. 
 
 ## Stay in touch
 
-- Author - [Maria Franshesca](http://vmtgames.com/)
+- Author - [Valentin Mendoza](http://vmtgames.com/)
 - Website - [http://vmtgames.com/](http://vmtgames.com/)
+- Twitter - [@mendozat94](https://twitter.com/mendozat94)
 
 ## License
 
