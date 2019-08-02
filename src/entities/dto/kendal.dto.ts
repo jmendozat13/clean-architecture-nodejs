@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
-export class CreateKendalDto {
+export class ClassKendalDto {
     @ApiModelProperty({
         example: 'Admission',
         description: 'Protocol option title',
