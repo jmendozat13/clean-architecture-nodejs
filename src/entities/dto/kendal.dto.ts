@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsString, Length } from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
 export class ClassKendalDto {
     @ApiModelProperty({
@@ -23,8 +23,8 @@ export class ClassKendalDto {
         example: 'admission, exam, enter',
         description: 'Keywords associated with the question and answer',
     })
-    @IsString()
-    keyword: string;
+    @Length(1)
+    keywords: string[];
     @ApiModelProperty({
         example: 'admission',
         description: 'Category associated with the question and answer',

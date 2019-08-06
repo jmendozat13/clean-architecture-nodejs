@@ -14,9 +14,7 @@ export const KendalSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    keyword: {
-        type: String,
-    },
+    keywords: [{ type: String }],
     category: {
         type: String,
         required: true,
