@@ -8,7 +8,7 @@ export class Kendal {
     @ApiModelProperty()
     output: string;
     @ApiModelProperty()
-    keyword: string;
+    keywords: string[];
     @ApiModelProperty()
     category: string;
     @ApiModelProperty()
