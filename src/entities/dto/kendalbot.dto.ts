@@ -3,9 +3,13 @@ import { IsString } from 'class-validator';
 
 export class KendalBotDto {
     @ApiModelProperty({
-        example: 'Hola Kendal',
+        example: 'Kendal init',
         description: 'Message query by users',
     })
     @IsString()
     inputmessage: string;
+}
+
+export function removeSpacesBlank(input: string): string {
+    return input.trimLeft().trimRight();
 }
