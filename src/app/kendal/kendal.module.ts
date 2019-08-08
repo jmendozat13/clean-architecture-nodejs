@@ -9,6 +9,8 @@ import { HistorymessageModule } from './historymessage/historymessage.module';
 import { ThreadmessageModule } from './threadmessage/threadmessage.module';
 import { KendalRepository } from '../../usecases/repository/kendal.repository';
 import { KendalMongoDB } from '../../data/mongodb/kendal.mongodb';
+import { KendalBotRepository } from '../../usecases/repository/kendalbot.repository';
+import { KendalBotMongoDB } from '../../data/mongodb/kendalbot.mongodb';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: 'Kendal', schema: KendalSchema }]),
@@ -18,6 +20,7 @@ import { KendalMongoDB } from '../../data/mongodb/kendal.mongodb';
   providers: [
     KendalUseCase,
     KendalBotUseCase,
-    { provide: KendalRepository, useClass: KendalMongoDB }],
+    { provide: KendalRepository, useClass: KendalMongoDB },
+    { provide: KendalBotRepository, useClass: KendalBotMongoDB }],
 })
 export class KendalModule { }
