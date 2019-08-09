@@ -7,11 +7,13 @@ import { KendalbotController } from './kendalbot/kendalbot.controller';
 import { KendalBotUseCase } from '../../usecases/usecase/kendalbot.usecase';
 import { HistorymessageModule } from './historymessage/historymessage.module';
 import { ThreadmessageModule } from './threadmessage/threadmessage.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: 'Kendal', schema: KendalSchema }]),
     HistorymessageModule,
-    ThreadmessageModule],
+    ThreadmessageModule,
+    UserModule],
   controllers: [KendalController, KendalbotController],
   providers: [KendalUseCase, KendalBotUseCase],
 })

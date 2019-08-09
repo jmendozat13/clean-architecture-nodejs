@@ -8,7 +8,6 @@ import { KendalBotDto } from '../../entities/dto/kendalbot.dto';
 @Injectable()
 export class KendalBotUseCase {
     constructor(@InjectModel('Kendal') private readonly kendalModel: Model<IKendal>) { }
-
     async chatBot(kendalBotDto: KendalBotDto): Promise<KendalBotResponse> {
         const kendal = await this.kendalModel.find({ input: kendalBotDto.inputmessage.trimLeft().trimRight() });
         const messagedefault = 'Hola soy Kendal, el asistente virtual de la UNT. ' +
@@ -16,3 +15,4 @@ export class KendalBotUseCase {
         return await new KendalBotResponse(messagedefault);
     }
 }
+3
