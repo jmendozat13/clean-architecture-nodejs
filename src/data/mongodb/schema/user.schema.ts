@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import * as bcrypts from 'mongoose-bcrypt';
 
-export const userSchema = new mongoose.Schema({
+export const UserSchema = new mongoose.Schema({
     username: {
         type: String,
         max: 80,
@@ -10,13 +10,12 @@ export const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
+        bcrypt: true,
     },
     date: {
         type: Date,
         default: Date.now,
-        bcrypt : true,
     },
 });
 
-userSchema.plugin(bcrypts), { rondas : 8 } ;
-
+UserSchema.plugin(bcrypts), { rondas: 8 };

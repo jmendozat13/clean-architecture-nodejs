@@ -20,11 +20,10 @@ export class ClassKendalDto {
     @IsString()
     output: string;
     @ApiModelProperty({
-        example: 'admission, exam, enter',
+        example: '["admission", "exam", "enter"]',
         description: 'Keywords associated with the question and answer',
     })
-    @IsString()
-    keyword: string;
+    keywords: string[];
     @ApiModelProperty({
         example: 'admission',
         description: 'Category associated with the question and answer',

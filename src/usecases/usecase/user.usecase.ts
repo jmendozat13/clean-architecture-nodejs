@@ -1,20 +1,16 @@
-import { Model } from 'mongoose';
-import { bcrypt } from 'mongoose-bcrypt';
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
 import { IUser } from '../../entities/interfaces/user.interfaces';
 import { UserDto } from '../../entities/dto/user.dto';
+import { UserRepository } from '../repository/user.repository';
 
 @Injectable()
-export class userUseCase {
-    constructor(@InjectModel('user') private readonly userModel: Model<IUser>) { }
+export class UserUseCase {
+    constructor(private readonly userRepository: UserRepository) { }
 
     async create(createUserDto: UserDto): Promise<IUser> {
-        const createUser = new this.userModel(createUserDto);
-        return await createUser.save();
+        return await this.userRepository.create(createUserDto);
     }
-
     async findAll(): Promise<IUser[]> {
-        return await this.userModel.find().exec();
+        return await this.userRepository.findAll();
     }
 }

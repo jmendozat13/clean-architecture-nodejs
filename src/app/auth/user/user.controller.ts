@@ -1,21 +1,23 @@
-import { Controller, Post, UsePipes, ValidationPipe, Body, HttpStatus, HttpException, Get} from '@nestjs/common';
-import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { userUseCase } from '../../../usecases/usecase/user.usecase';
-import { user } from '../../../entities/entity/user.entity';
+import { Controller, Post, HttpStatus, UsePipes, HttpException, Body, Get } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
+import { User } from '../../../entities/entity/user.entity';
+import { UserUseCase } from '../../../usecases/usecase/user.usecase';
+import { ValidationPipe } from '../../pipes/validation.pipe';
 import { UserDto } from '../../../entities/dto/user.dto';
 import { IUser } from 'src/entities/interfaces/user.interfaces';
 
 @Controller('user')
 @ApiUseTags('User')
 export class UserController {
-    constructor(private readonly userUseCase: userUseCase) { }
+
+    constructor(private readonly userUseCase: UserUseCase) { }
 
     @Post()
     @ApiOperation({ title: 'Add KendalBot user or maintainer user' })
     @ApiResponse({
         status: HttpStatus.CREATED,
         description: 'The record has been successfully created.',
-        type: user,
+        type: User,
     })
     @ApiResponse({
         status: 500,
@@ -24,8 +26,7 @@ export class UserController {
     @UsePipes(new ValidationPipe())
     async create(@Body() createUserDto: UserDto) {
         try {
-            const user = await this.userUseCase.create(createUserDto);
-            return user;
+            return await this.userUseCase.create(createUserDto);
         } catch (err) {
             throw new HttpException({ status: HttpStatus.INTERNAL_SERVER_ERROR, error: err.message },
                 HttpStatus.INTERNAL_SERVER_ERROR);
@@ -33,11 +34,11 @@ export class UserController {
     }
 
     @Get()
-    @ApiOperation({ title: 'Return all logical knowledge of user' })
+    @ApiOperation({ title: 'Return all user' })
     @ApiResponse({
         status: HttpStatus.OK,
         description: 'The found record',
-        type: user,
+        type: User,
     })
     async findAll(): Promise<IUser[]> {
         return await this.userUseCase.findAll();

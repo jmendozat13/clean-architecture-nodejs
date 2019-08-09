@@ -8,6 +8,7 @@ export class UserDto {
     @IsString()
     username: string;
     @ApiModelProperty({
+        format: 'password',
         example: 'Kendal123',
         description: 'Password who interacts with maintainer, not required for KendalBot user',
     })
