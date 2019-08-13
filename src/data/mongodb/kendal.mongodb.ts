@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { KendalRepository } from 'src/usecases/repository/kendal.repository';
+import { KendalRepository } from '../../usecases/repository/kendal.repository';
 import { ClassKendalDto } from '../../entities/dto/kendal.dto';
 import { IKendal } from '../../entities/interfaces/kendal.interfaces';
 import { InjectModel } from '@nestjs/mongoose';

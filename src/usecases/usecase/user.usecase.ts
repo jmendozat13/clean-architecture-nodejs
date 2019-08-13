@@ -13,4 +13,7 @@ export class UserUseCase {
     async findAll(): Promise<IUser[]> {
         return await this.userRepository.findAll();
     }
+    async findByUsername(username: string): Promise<IUser> {
+        return await this.findByUsername(username);
+    }
 }

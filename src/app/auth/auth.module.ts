@@ -13,5 +13,6 @@ import { UserSchema } from '../../data/mongodb/schema/user.schema';
   providers: [
     UserUseCase,
     { provide: UserRepository, useClass: UserMongoDB }],
+  exports: [{ provide: UserRepository, useClass: UserMongoDB }],
 })
 export class AuthModule { }

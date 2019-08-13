@@ -13,8 +13,13 @@ export class HistoryMessageMongoDB implements HistoryMessageRepository {
         const saveHistoryMessage = new this.historyModel(historymessage);
         return await saveHistoryMessage.save();
     }
-
     async findBy(headerKendalBot: HeaderKendalBotDto): Promise<IHistoryMessage> {
-        return await this.historyModel.findOne({ip: headerKendalBot.ip, device: headerKendalBot.device}).lean();
+        return await this.historyModel
+        .findOne({ip: headerKendalBot.ip, device: headerKendalBot.device})
+        .populate('user')
+        .lean();
+    }
+    async update(historymessage: IHistoryMessage): Promise<IHistoryMessage> {
+        return await this.historyModel.updateOne(historymessage);
     }
 }

@@ -4,7 +4,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { KendalSchema } from '../../data/mongodb/schema/kendal.schema';
 import { KendalUseCase } from '../../usecases/usecase/kendal.usecase';
 import { KendalbotController } from './kendalbot/kendalbot.controller';
-import { KendalBotUseCase } from '../../usecases/usecase/kendalbot.usecase';
 import { KendalRepository } from '../../usecases/repository/kendal.repository';
 import { KendalMongoDB } from '../../data/mongodb/kendal.mongodb';
 import { KendalBotRepository } from '../../usecases/repository/kendalbot.repository';
@@ -17,11 +16,15 @@ import { ThreadMessageRepository } from '../../usecases/repository/threadmessage
 import { ThreadMessageMongoDB } from '../../data/mongodb/threadmessage.mongodb';
 import { HistoryMessageSchema } from '../../data/mongodb/schema/historymessage.schema';
 import { ThreadMessageSchema } from '../../data/mongodb/schema/threadmessage.schema';
+import { HistoryMessageUseCase } from '../../usecases/usecase/historymessage.usecase';
+import { KendalBotUseCase} from '../../usecases/usecase/kendalbot.usecase';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: 'Kendal', schema: KendalSchema },
   { name: 'HistoryMessage', schema: HistoryMessageSchema },
-  { name: 'ThreadMessage', schema: ThreadMessageSchema }])],
+  { name: 'ThreadMessage', schema: ThreadMessageSchema }]),
+  AuthModule],
   controllers: [KendalController,
     KendalbotController,
     HistorymessageController,
@@ -29,6 +32,7 @@ import { ThreadMessageSchema } from '../../data/mongodb/schema/threadmessage.sch
   providers: [
     KendalUseCase,
     KendalBotUseCase,
+    HistoryMessageUseCase,
     { provide: KendalRepository, useClass: KendalMongoDB },
     { provide: KendalBotRepository, useClass: KendalBotMongoDB},
     { provide: HistoryMessageRepository, useClass: HistoryMessageMongoDB },

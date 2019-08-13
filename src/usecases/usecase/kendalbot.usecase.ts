@@ -7,34 +7,45 @@ import { ThreadMessageRepository } from '../repository/threadmessage.reposiitory
 import { HeaderKendalBotDto } from '../../entities/dto/headerkendalbot.dto';
 import { HistoryMessageDto } from '../../entities/dto/historymessage.dto';
 import { ThreadMessageDto } from '../../entities/dto/threadmessage.dto';
+import { UserRepository } from '../repository/user.repository';
 
 @Injectable()
 export class KendalBotUseCase {
     constructor(
-        private kendalbotrepository: KendalBotRepository,
-        private historyrepository: HistoryMessageRepository,
-        private threadrepository: ThreadMessageRepository) { }
+        private readonly userrespository: UserRepository,
+        private readonly kendalbotrepository: KendalBotRepository,
+        private readonly historyrepository: HistoryMessageRepository,
+        private readonly threadrepository: ThreadMessageRepository) { }
 
     async chatBot(headerkendalbot: HeaderKendalBotDto, kendalBotDto: KendalBotDto): Promise<KendalBotResponse> {
-        let historyMessage = await this.historyrepository.findBy(headerkendalbot);
+        const results = await Promise.all([this.historyrepository.findBy(headerkendalbot),
+            this.userrespository.findByUsername(headerkendalbot.username)],
+            );
+        let historyMessage = results[0];
+        const user = results[1];
+
         if (historyMessage == null) {
             const historymessagedto = new HistoryMessageDto(headerkendalbot.ip,
                 headerkendalbot.device,
                 headerkendalbot.aditionalInfo,
-                headerkendalbot.username);
+                user._id);
             historyMessage = await this.historyrepository.initHistoryMessage(historymessagedto);
         }
         const threadinputmessage = new ThreadMessageDto(kendalBotDto.inputmessage,
-            'jmendoto',
+            headerkendalbot.username,
             historyMessage._id,
             'input');
-        await this.threadrepository.addThreadToHistoryMessage(threadinputmessage);
+        const threadinputmsgsave =  await this.threadrepository.addThreadToHistoryMessage(threadinputmessage);
+        historyMessage.threadMessages.push(threadinputmsgsave);
+
         const kendalbot =  await this.kendalbotrepository.chatBot(kendalBotDto);
         const threadoutputmessage = new ThreadMessageDto(kendalbot.outputmessage,
             'kendal',
             historyMessage._id,
             'output');
-        await this.threadrepository.addThreadToHistoryMessage(threadoutputmessage);
+        const threadoutputmsgsave = await this.threadrepository.addThreadToHistoryMessage(threadoutputmessage);
+        historyMessage.threadMessages.push(threadoutputmsgsave);
+        await this.historyrepository.update(historyMessage);
         return kendalbot;
     }
 }

@@ -10,14 +10,11 @@ export class ThreadMessageMongoDB implements ThreadMessageRepository {
     @InjectModel('ThreadMessage') private readonly threadModel: Model<IThreadMessage>,
     @InjectModel('HistoryMessage') private readonly historyModel: Model<IHistoryMessage>) { }
 
-    async addThreadToHistoryMessage(threadMessageDto: ThreadMessageDto): Promise<boolean> {
+    async addThreadToHistoryMessage(threadMessageDto: ThreadMessageDto): Promise<IThreadMessage> {
         const history = this.historyModel.findOne({_id: threadMessageDto.historyMsgId});
-        let result = false;
         if (history) {
             const saveThreadMessage = new this.threadModel(threadMessageDto);
-            const resultsave = await saveThreadMessage.save();
-            result = resultsave != null ? true : false;
+            return await saveThreadMessage.save();
         }
-        return result;
     }
 }

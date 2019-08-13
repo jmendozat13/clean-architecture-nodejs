@@ -4,7 +4,7 @@ import { User } from '../../../entities/entity/user.entity';
 import { UserUseCase } from '../../../usecases/usecase/user.usecase';
 import { ValidationPipe } from '../../pipes/validation.pipe';
 import { UserDto } from '../../../entities/dto/user.dto';
-import { IUser } from 'src/entities/interfaces/user.interfaces';
+import { IUser } from '../../../entities/interfaces/user.interfaces';
 
 @Controller('user')
 @ApiUseTags('User')

@@ -24,7 +24,7 @@ export class KendalbotController {
     @UsePipes(new ValidationPipe())
     async chatbot(@Body() kendalbotDto: KendalBotDto) {
         try {
-            const headerKendalBot = new HeaderKendalBotDto('localhost', 'chrome', 'desktop', 'jmendozat');
+            const headerKendalBot = new HeaderKendalBotDto('localhost', 'chrome', 'desktop', 'JMENDOZAT');
             return await this.kendalBotUseCase.chatBot(headerKendalBot, kendalbotDto);
         } catch (err) {
             throw new HttpException({ status: HttpStatus.INTERNAL_SERVER_ERROR, error: err.message },

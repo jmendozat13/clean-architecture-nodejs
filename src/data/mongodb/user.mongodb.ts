@@ -5,6 +5,7 @@ import { IUser } from '../../entities/interfaces/user.interfaces';
 import { InjectModel } from '@nestjs/mongoose';
 
 export class UserMongoDB implements UserRepository {
+
     constructor(@InjectModel('User') private readonly userModel: Model<IUser>) { }
 
     async create(createUserDto: UserDto): Promise<IUser> {
@@ -13,5 +14,8 @@ export class UserMongoDB implements UserRepository {
     }
     async findAll(): Promise<IUser[]> {
         return await this.userModel.find().exec();
+    }
+    async findByUsername(username: string): Promise<IUser> {
+        return await this.userModel.findOne({username}).lean();
     }
 }
