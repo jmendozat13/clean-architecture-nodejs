@@ -11,9 +11,17 @@ import { KendalBotRepository } from '../../usecases/repository/kendalbot.reposit
 import { KendalBotMongoDB } from '../../data/mongodb/kendalbot.mongodb';
 import { HistorymessageController } from './historymessage/historymessage.controller';
 import { ThreadmessageController } from './threadmessage/threadmessage.controller';
+import { HistoryMessageMongoDB } from '../../data/mongodb/historymessage.mongodb';
+import { HistoryMessageRepository } from '../../usecases/repository/historymessage.repository';
+import { ThreadMessageRepository } from '../../usecases/repository/threadmessage.reposiitory';
+import { ThreadMessageMongoDB } from '../../data/mongodb/threadmessage.mongodb';
+import { HistoryMessageSchema } from '../../data/mongodb/schema/historymessage.schema';
+import { ThreadMessageSchema } from '../../data/mongodb/schema/threadmessage.schema';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Kendal', schema: KendalSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'Kendal', schema: KendalSchema },
+  { name: 'HistoryMessage', schema: HistoryMessageSchema },
+  { name: 'ThreadMessage', schema: ThreadMessageSchema }])],
   controllers: [KendalController,
     KendalbotController,
     HistorymessageController,
@@ -22,6 +30,8 @@ import { ThreadmessageController } from './threadmessage/threadmessage.controlle
     KendalUseCase,
     KendalBotUseCase,
     { provide: KendalRepository, useClass: KendalMongoDB },
-    { provide: KendalBotRepository, useClass: KendalBotMongoDB }],
+    { provide: KendalBotRepository, useClass: KendalBotMongoDB},
+    { provide: HistoryMessageRepository, useClass: HistoryMessageMongoDB },
+    { provide: ThreadMessageRepository, useClass: ThreadMessageMongoDB }],
 })
 export class KendalModule { }

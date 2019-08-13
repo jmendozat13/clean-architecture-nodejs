@@ -3,6 +3,7 @@ import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { KendalBotResponse } from '../../../entities/entity/kendalbot.entity';
 import { KendalBotUseCase } from '../../../usecases/usecase/kendalbot.usecase';
 import { KendalBotDto } from '../../../entities/dto/kendalbot.dto';
+import { HeaderKendalBotDto } from '../../../entities/dto/headerkendalbot.dto';
 
 @Controller('kendalbot')
 @ApiUseTags('KendalBot')
@@ -23,7 +24,8 @@ export class KendalbotController {
     @UsePipes(new ValidationPipe())
     async chatbot(@Body() kendalbotDto: KendalBotDto) {
         try {
-            return await this.kendalBotUseCase.chatBot(kendalbotDto);
+            const headerKendalBot = new HeaderKendalBotDto('localhost', 'chrome', 'desktop', 'jmendozat');
+            return await this.kendalBotUseCase.chatBot(headerKendalBot, kendalbotDto);
         } catch (err) {
             throw new HttpException({ status: HttpStatus.INTERNAL_SERVER_ERROR, error: err.message },
                 HttpStatus.INTERNAL_SERVER_ERROR);
