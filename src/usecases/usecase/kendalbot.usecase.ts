@@ -35,10 +35,16 @@ export class KendalBotUseCase {
             headerkendalbot.username,
             historyMessage._id,
             'input');
-        const threadinputmsgsave =  await this.threadrepository.addThreadToHistoryMessage(threadinputmessage);
+
+        const resultstasks = await Promise.all([
+            this.threadrepository.addThreadToHistoryMessage(threadinputmessage),
+            this.kendalbotrepository.chatBot(kendalBotDto),
+        ]);
+
+        const threadinputmsgsave =  resultstasks[0];
         historyMessage.threadMessages.push(threadinputmsgsave);
 
-        const kendalbot =  await this.kendalbotrepository.chatBot(kendalBotDto);
+        const kendalbot =  resultstasks[1];
         const threadoutputmessage = new ThreadMessageDto(kendalbot.outputmessage,
             'kendal',
             historyMessage._id,
